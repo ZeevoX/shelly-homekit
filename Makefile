@@ -8,7 +8,7 @@ LOCAL ?= $(shell which docker> /dev/null && echo -n 1 || echo -n 0)
 CLEAN ?= 0
 VERBOSE ?= 0
 RELEASE ?= 0
-RELEASE_SUFFIX ?= $(shell git describe --tags --dirty | sed -r 's/^[^-]*(-|$$)/-latest/g')
+RELEASE_SUFFIX ?=
 MOS_BUILD_FLAGS ?=
 BUILD_DIR ?= ./build_$*
 
