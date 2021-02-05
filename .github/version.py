@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 import argparse
-from subprocess import check_output
+import subprocess
 from os import environ
 from json import load
 
 def run(*args):
-    return check_output(args).decode('utf-8').strip()
+    return subprocess.check_output(args).decode('utf-8').strip()
 
 def git_describe(*args):
     return run('git', 'describe', '--tags', *args)
@@ -14,7 +14,7 @@ def git_branch_name():
     return run('git', 'branch', '--show-current')
 
 def commits_since_forkpoint():
-    return len(run('git', 'log', '--oneline', 'master...').split('\n'))
+    return int(run('git', 'rev-list', '--count',  '--no-merges', 'master..'))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Get Shelly-HomeKit version name using Git')
